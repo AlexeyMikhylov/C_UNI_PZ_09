@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-
 int main()
 {
 	run();
@@ -19,6 +18,8 @@ int run(void)
 	{
 	case 0:
 		exit(1);
+	case 1:
+		task1(); printf("\n"); run();
 	case 101:
 		ex1(); printf("\n"); run();
 	case 102:
@@ -87,4 +88,82 @@ int ex2(void)
 
 	printf("Click on Enter...");
 	(void)getch();
+}
+
+int task1(void)
+{
+	int** matrix;
+	int* maxCol;
+	int i, j, n, m;
+	int sumAll = 0, sumRow = 0, sumCol = 0;
+	
+
+	printf("Enter n:\n");
+	scanf_s("%d", &n);
+	printf("Enter m:\n");
+	scanf_s("%d", &m);
+
+
+	matrix = (int**)malloc(n * sizeof(int*));
+	for (int i = 0; i < n; i++)
+		matrix[i] = (int*)malloc(m * sizeof(int));
+
+	maxCol = (int*)malloc(m * sizeof(int));
+
+	srand(time(0));
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			matrix[i][j] = rand() % 10;
+
+	//1
+	printf("\nMATRIX:\n");
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			sumAll += matrix[i][j];
+			printf("%d\t", matrix[i][j]);
+		}
+		printf("\n");
+	}
+
+	//2
+	printf("\nsum of elements: %d", sumAll);
+
+	//3
+	printf("\n");
+	for (int i = 0; i < n; i++) {
+		sumRow = 0;
+		for (int j = 0; j < m; j++) {
+			sumRow += matrix[i][j];
+		}
+		printf("sum of elements in row %d = %d\n", i, sumRow);
+	}
+
+	//4
+	printf("\n");
+	for (int j = 0; j < m; j++) {
+		sumCol = 0;
+		for (int i = 0; i < n; i++) {
+			sumCol += matrix[i][j];
+		}
+		printf("sum of elements in columnn %d = %d\n", j, sumCol);
+	}
+
+	//5
+	printf("\n");
+	maxCol[0] = matrix[0][0];
+
+	for (int j = 0; j < m; j++) {
+		maxCol[0] = matrix[0][j];
+		for (int i = 0; i < n; i++) {
+			if (maxCol[j] < matrix[i][j]) {
+				maxCol[j] = matrix[i][j];
+			}
+		}
+		printf("greatest in columnn %d = %d\n", j, maxCol[j]);
+	}
+
+	//6
+
+
+	free(matrix);
 }
