@@ -19,7 +19,15 @@ int run(void)
 	case 0:
 		exit(1);
 	case 1:
-		task1(); printf("\n"); run();
+		task1_8(); printf("\n"); run();
+	case 9:
+		task9(); printf("\n"); run();
+	case 10:
+		task10(); printf("\n"); run();
+	case 11:
+		task11(); printf("\n"); run();
+	case 12:
+		task12(); printf("\n"); run();
 	case 101:
 		ex1(); printf("\n"); run();
 	case 102:
@@ -90,12 +98,12 @@ int ex2(void)
 	(void)getch();
 }
 
-int task1(void)
+int task1_8(void)
 {
 	int** matrix;
 	int* maxCol;
 	int i, j, n, m;
-	int sumAll = 0, sumRow = 0, sumCol = 0;
+	int sumAll = 0, sumRow = 0, sumCol = 0, sumMain = 0, sumSub = 0, sumUpper = 0;
 	
 
 	printf("Enter n:\n");
@@ -163,7 +171,228 @@ int task1(void)
 	}
 
 	//6
+	printf("\n");
+	for (int i = 0; i < n; i++) {
 
+		sumMain += matrix[i][i];
+	}
+	printf("sum of main diagonal = %d\n", sumMain);
+
+	//7
+	printf("\n");
+	for (int i = 0; i < n; i++) {
+
+		sumSub += matrix[i][n - i - 1];
+	}
+	printf("sum of main diagonal = %d\n", sumSub);
+
+	//8
+	printf("\n");
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			if (i < j)
+				sumUpper += matrix[i][j];
+		}
+	}
+	printf("sum of els under main diagonal = %d\n", sumUpper);
+
+	//9
+	printf("\n");
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			if (i < j)
+				sumUpper += matrix[i][j];
+		}
+	}
+	printf("sum of els under main diagonal = %d\n", sumUpper);
+
+	free(matrix);
+}
+
+task9(void)
+{
+	int** matrix;
+	int i, j, n, m;
+
+
+	printf("Enter n:\n");
+	scanf_s("%d", &n);
+	printf("Enter m:\n");
+	scanf_s("%d", &m);
+
+
+	matrix = (int**)malloc(n * sizeof(int*));
+	for (int i = 0; i < n; i++)
+		matrix[i] = (int*)malloc(m * sizeof(int));
+
+	srand(time(0));
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			matrix[i][j] = rand() % 10;
+
+	//9
+	printf("\nMATRIX:\n");
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			printf("%d\t", matrix[i][j]);
+		}
+		printf("\n");
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j <= i; j++) {
+			matrix[i][j] = 1;
+		}
+	}
+
+	printf("\nMATRIX:\n");
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			printf("%d\t", matrix[i][j]);
+		}
+		printf("\n");
+	}
+
+	free(matrix);
+}
+
+int task10(void)
+{
+	int** matrix;
+	int i, j, n, m;
+
+
+	printf("Enter n:\n");
+	scanf_s("%d", &n);
+	printf("Enter m:\n");
+	scanf_s("%d", &m);
+
+
+	matrix = (int**)malloc(n * sizeof(int*));
+	for (int i = 0; i < n; i++)
+		matrix[i] = (int*)malloc(m * sizeof(int));
+
+	srand(time(0));
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			matrix[i][j] = rand() % 10;
+
+	//9
+	printf("\nMATRIX:\n");
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			printf("%d\t", matrix[i][j]);
+		}
+		printf("\n");
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int j = i; j < n; j++) {
+			matrix[i][j] = 1;
+		}
+	}
+
+	printf("\nMATRIX:\n");
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			printf("%d\t", matrix[i][j]);
+		}
+		printf("\n");
+	}
+
+	free(matrix);
+}
+
+int task11(void)
+{
+	int** matrix;
+	int i, j, n, m;
+
+
+	printf("Enter n:\n");
+	scanf_s("%d", &n);
+	printf("Enter m:\n");
+	scanf_s("%d", &m);
+
+
+	matrix = (int**)malloc(n * sizeof(int*));
+	for (int i = 0; i < n; i++)
+		matrix[i] = (int*)malloc(m * sizeof(int));
+
+	srand(time(0));
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			matrix[i][j] = rand() % 10;
+
+	//9
+	printf("\nMATRIX:\n");
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			printf("%d\t", matrix[i][j]);
+		}
+		printf("\n");
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m-i; j++) {
+			matrix[i][j] = 1;
+		}
+	}
+
+	printf("\nMATRIX:\n");
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			printf("%d\t", matrix[i][j]);
+		}
+		printf("\n");
+	}
+
+	free(matrix);
+}
+
+int task12(void)
+{
+	int** matrix;
+	int i, j, n, m;
+
+
+	printf("Enter n:\n");
+	scanf_s("%d", &n);
+	printf("Enter m:\n");
+	scanf_s("%d", &m);
+
+
+	matrix = (int**)malloc(n * sizeof(int*));
+	for (int i = 0; i < n; i++)
+		matrix[i] = (int*)malloc(m * sizeof(int));
+
+	srand(time(0));
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			matrix[i][j] = rand() % 10;
+
+	//9
+	printf("\nMATRIX:\n");
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			printf("%d\t", matrix[i][j]);
+		}
+		printf("\n");
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int j = (n-i-1); j < m; j++) {
+			matrix[i][j] = 1;
+		}
+	}
+
+	printf("\nMATRIX:\n");
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			printf("%d\t", matrix[i][j]);
+		}
+		printf("\n");
+	}
 
 	free(matrix);
 }
